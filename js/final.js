@@ -13,16 +13,16 @@ class juego
 }
 
 //JUEGOS
-const juego0 = new juego("Crash Bandicoot 4: It's About Time", 9000, "producto00");
-const juego1 = new juego("Cyberpunk 2077", 6000, "producto01");
-const juego2 = new juego("DeathLoop", 10000, "producto02");
-const juego3 = new juego("Doom Eternal", 3800, "producto03");
-const juego4 = new juego("GTA The Trilogy", 12000, "producto04");
-const juego5 = new juego("Guilty Gear Strive", 10000, "producto05");
-const juego6 = new juego("It Takes Two", 8100, "producto06");
-const juego7 = new juego("Metroid Dread", 11000, "producto07");
-const juego8 = new juego("Nioh 2", 9000, "producto08");
-const juego9 = new juego("Psychonauts 2", 9000, "producto09");
+const juego0 = new juego("Crash Bandicoot 4: It's About Time", 9000, "producto0");
+const juego1 = new juego("Cyberpunk 2077", 6000, "producto1");
+const juego2 = new juego("DeathLoop", 10000, "producto2");
+const juego3 = new juego("Doom Eternal", 3800, "producto3");
+const juego4 = new juego("GTA The Trilogy", 12000, "producto4");
+const juego5 = new juego("Guilty Gear Strive", 10000, "producto5");
+const juego6 = new juego("It Takes Two", 8100, "producto6");
+const juego7 = new juego("Metroid Dread", 11000, "producto7");
+const juego8 = new juego("Nioh 2", 9000, "producto8");
+const juego9 = new juego("Psychonauts 2", 9000, "producto9");
 const juego10 = new juego("Ratchet and Clank Rift Apart", 6750, "producto10");
 const juego11 = new juego("Resident Evil Village", 10000, "producto11");
 const juego12 = new juego("Returnal", 10400, "producto12");
@@ -56,18 +56,18 @@ function agregarDinero()
 
     if (isNaN(saldoAgregado))
     {
-        alert("El número ingresado no es valido");
-        console.log("El número ingresado no es valido");
+        alert("El valor ingresado no es un número");
+        console.log("El valor ingresado no es un número");
     } 
     else if (saldoAgregado < 0)
     {
-        alert("No se puede disminuir el saldo actual, solo agregar, su saldo sigue siendo de " + saldoActual);
-        console.log("No se puede disminuir el saldo actual, solo agregar, su saldo sigue siendo de " + saldoActual);
+        alert("No se aceptan valores negativos");
+        console.log("No se aceptan valores negativos");
     } 
     else if (saldoAgregado == 0)
     {
-        alert("No se agrego dinero, su saldo sigue siendo " + saldoActual);
-        console.log("No se agrego dinero, su saldo sigue siendo " + saldoActual);
+        alert("No se agrego dinero a su saldo");
+        console.log("No se agrego dinero a su saldo");
     } 
     else
     {
@@ -96,10 +96,10 @@ function comprarJuego(juegoElegido)
         saldoActual = saldoEnProceso;
         misJuegos.push(juegoElegido.nombre);
         
+        alert("Felicidades, acabas de comprar: " + juegoElegido.nombre);
         document.getElementById("saldoActual").innerHTML = saldoActual;
-        document.getElementById("misJuegos").innerHTML = misJuegos.join("</br>");
+        document.getElementById("misJuegos").innerHTML = "• " + misJuegos.join("</br> • ");
         document.getElementById("cantidadJuegos").innerHTML = "(" + misJuegos.length + ")";
-        alert("Acabas de comprar:" + "\r\n" + "\r\n" + juegoElegido.nombre);
         console.log("El usuario acaba de comprar el juego " + juegoElegido.nombre + " y su saldo ahora es de " + saldoActual);
         console.log("Juegos comprados: " + misJuegos.length);
     }

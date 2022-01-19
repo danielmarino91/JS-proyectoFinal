@@ -131,4 +131,12 @@ section {
     font-size: 1.5rem;
     margin: 1.5rem 0rem;
     color: #f34213;
-    font-family: Ubuntu, sans-serif; }
+    font-family: Ubuntu, sans-serif;
+    line-height: 2; }
+  .footerCart h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1.5rem 0rem;
+    color: #bbb8b2;
+    font-family: Ubuntu, sans-serif;
+    line-height: 2; }
