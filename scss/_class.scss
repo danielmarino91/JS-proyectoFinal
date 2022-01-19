@@ -1,0 +1,183 @@
+.navbar
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #2e2e3a;
+    box-shadow: 0px 1px 5px 1px black;
+    
+    .navbar__logo
+    {
+        margin: auto 0.3rem;
+    }
+    
+    .navbar__wallet
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem 2rem 1rem 0rem;
+        
+        .navbar__wallet--balance
+        {
+            display: flex;
+            flex-direction: row;
+
+            p
+            {
+                color: #f34213;
+                font-size: 1.5rem;
+                font-family: AudioWide, sans-serif;
+                margin: 0rem 0.5rem 0rem 0rem;
+            }
+
+            span
+            {
+                color: #f34213;
+                font-size: 1.5rem;
+                font-family: AudioWide, sans-serif;
+                
+            }
+
+            img
+            {
+                width: 22px;
+                height: 22px;
+                object-fit: cover;
+                margin: 0.3rem 0.5rem;
+            }
+        }
+        .navbar__wallet--button
+        {
+            margin: 0.7rem 0rem 0rem 0rem;
+
+            button
+            {
+                background-color: #2e2e3a;
+                border: 2px solid #f34213;
+                padding: 0.6rem;
+                color: #f34213;
+                font-size: 1.2rem;
+                transition: border 0.2s, color 0.2s, background-color 0.2s;
+            }
+
+            button:hover
+            {
+                background-color: #f34213;
+                border: 2px solid #f34213;
+                color: #2e2e3a;
+                cursor: pointer;
+            }
+
+            button:active
+            {
+                background-color: white;
+                border: 2px solid white;
+                color: #2e2e3a;
+            }
+        }
+    }
+    
+}
+
+.productGames
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    
+    .productGames__game
+    {
+        display: flex;
+        flex-direction: column;
+        width: 280px;
+        height: 580px;
+        margin: 0.5rem;
+        padding: 0.8rem;
+        border: 2px solid #f34213 ;
+        background-color: #2e2e3a;
+        transition: background-color 0.2s;
+
+        img
+        {
+            border: 3px solid #f34213 ;
+        }
+    }
+
+    .productGames__game:hover
+    {
+        background-color: #24242c;
+    }
+
+    .productGames__cart
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 0rem;
+
+        h3
+        {
+            text-align: center;
+            color: #bbb8b2;
+            font-size: 1.5rem;
+            padding: 1rem;
+
+            span
+            {
+                font-size: 2rem;
+                color: #f34213;
+            }
+        }
+
+        button
+            {
+                background-color: #2e2e3a;
+                border: 3px solid #f34213;
+                padding: 0.5rem;
+                width: 240px;
+                height: 96px;
+                transition: border 0.2s, color 0.2s, background-color 0.2s;
+
+                img
+                {
+                    border: none;
+                }
+            }
+
+            button:hover
+            {
+                background-color: #f34213;
+                border: 3px solid #f34213;
+                color: #2e2e3a;
+                cursor: pointer;
+            }
+
+            button:active
+            {
+                background-color: #2e2e3a;
+                border: 3px solid white;
+                color: #2e2e3a;
+            }
+    }
+}
+
+.footerCart
+{
+    background-color: #2e2e3a;
+    box-shadow: 1px 1px 10px 1px black;
+    width: 900px;
+    height: max-content;
+    right: 0;
+    z-index: 1;
+
+    h3
+    {
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 1.5rem 0rem;
+        color: #f34213;
+        font-family: $fontMain2;
+    }
+}

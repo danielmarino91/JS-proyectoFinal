@@ -1,0 +1,21 @@
+h1
+{
+    text-align: center;
+    font-size: 3.5rem;
+    margin: 3rem;
+    color: white;
+    font-family: $fontMain2;
+}
+
+body
+{
+    background-color: #1f1f27;
+}
+
+section
+{
+    display: flex;
+    flex-direction: row;
+    margin: 3rem;
+}
+
