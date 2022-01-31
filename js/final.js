@@ -4,12 +4,12 @@ if (isNaN(saldoActual))
     {
         saldoActual = parseInt(0);
         document.getElementById("saldoActual").innerHTML = saldoActual;
-        console.log("Saldo inicial: " + saldoActual);
+        console.log(`Saldo inicial: ${saldoActual}`);
     }
     else
     {
         document.getElementById("saldoActual").innerHTML = saldoActual;
-        console.log("Saldo inicial: " + saldoActual);
+        console.log(`Saldo inicial: ${saldoActual}`);
     }
 
 let juegoRepetido = false;
@@ -43,6 +43,10 @@ const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
 
 //ARRAY DE OBJETOS
 let listaDeJuegos = [];
+const actLista = JSON.parse(localStorage.getItem("listaEnJSON"));
+listaDeJuegos = actLista;
+document.getElementById("misJuegos").innerHTML = listaDeJuegos.join("</br>");
+document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
 
 //PRINTEAR NOMBRE Y PRECIO EN EL HTML
 document.getElementById("producto0").innerHTML = juego0.nombre + "</br><span>" + juego0.precio + "</span>";
@@ -84,12 +88,12 @@ function agregarDinero()
     else 
     {
         saldoActual = saldoActual + saldoAgregado;
-
-        alert("Su saldo actual es de: " + saldoActual)
         localStorage.setItem("saldoGuardado", saldoActual);
+
+        alert(`Su saldo actual es de: ${saldoActual}`);
         document.getElementById("saldoActual").innerHTML = saldoActual;
-        console.log("Recarga de saldo: " + saldoAgregado)
-        console.log("Saldo actual: " + saldoActual)
+        console.log(`Recarga de saldo: ${saldoAgregado}`);
+        console.log(`Saldo actual: ${saldoActual}`);
     }
 }
 
@@ -103,34 +107,37 @@ function comprarJuego(juegoElegido)
     
     if (saldoEnProceso < 0) 
     {
-        alert("Saldo insuficiente, necesita " + restoSaldo + " mas para realizar la compra de " + juegoElegido.nombre);
-        console.log("Saldo insuficiente, necesita " + restoSaldo + " mas para realizar la compra de " + juegoElegido.nombre);
+        alert(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
+        console.log(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
     } 
     else if (juegoRepetido == true) 
     {
-        alert("Ya tienes " + juegoElegido.nombre + " en tu lista de juegos");
-        console.log("Ya tienes " + juegoElegido.nombre + " en tu lista de juegos");        
+        alert(`Ya tienes ${juegoElegido.nombre} en tu lista de juegos`);
+        console.log(`Ya tienes ${juegoElegido.nombre} en tu lista de juegos`);        
     }
     else 
     {
         saldoActual = saldoEnProceso;
+        localStorage.setItem("saldoGuardado", saldoActual);
         listaDeJuegos.push(juegoElegido.nombre);
         
-        alert("Felicidades, acabas de comprar: " + juegoElegido.nombre);
-        localStorage.setItem("saldoGuardado", saldoActual);
+        alert(`Felicidades, acabas de comprar: ${juegoElegido.nombre}`);
         document.getElementById("saldoActual").innerHTML = saldoActual;
-        document.getElementById("misJuegos").innerHTML = "• " + listaDeJuegos.join("</br> • ");
-        document.getElementById("cantidadJuegos").innerHTML = "(" + listaDeJuegos.length + ")";
-        console.log("El usuario acaba de comprar el juego " + juegoElegido.nombre + " y su saldo ahora es de " + saldoActual);
-        console.log("Juegos comprados: " + listaDeJuegos.length);
+        document.getElementById("misJuegos").innerHTML = listaDeJuegos.join("</br>");
+        document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
+        console.log(`El usuario acaba de comprar el juego ${juegoElegido.nombre} y su saldo ahora es de ${saldoActual}`);
+        console.log(`Juegos comprados: ${listaDeJuegos.length}`);
     }
+
+    const listaEnJSON = JSON.stringify(listaDeJuegos);
+    localStorage.setItem("listaEnJSON", listaEnJSON);
 }
 
 function resetearSaldo()
 {
     saldoActual = parseInt(0);
-
     localStorage.setItem("saldoGuardado", saldoActual);
+    
     document.getElementById("saldoActual").innerHTML = saldoActual;
     console.log("Se reseteo el saldo a 0");
 }
@@ -138,14 +145,17 @@ function resetearSaldo()
 function vaciarCarrito()
 {
     listaDeJuegos.length = 0;
-    
+    const vaciarListaEnJSON = JSON.stringify(listaDeJuegos);
+    localStorage.setItem("listaEnJSON", vaciarListaEnJSON);
+
     document.getElementById("misJuegos").innerHTML = listaDeJuegos.join();
-    document.getElementById("cantidadJuegos").innerHTML = " ";
-    console.log("Se vacio la lista, ahora tienes " + listaDeJuegos.length + " juegos");
+    document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
+    console.log(`Se vacio la lista, ahora tienes ${listaDeJuegos.length} juegos`);
 }
 
 function comprobarJuego(juegoVariable)
 {
+    localStorage.getItem("listaDeJuegos");
     let identificarJuego = juegoVariable.nombre;
     let buscarJuegoEnArray = listaDeJuegos.find(x => x === juegoVariable.nombre);
 
