@@ -85,7 +85,7 @@ section {
     .productGames .productGames__game img {
       border: 3px solid #f34213; }
   .productGames .productGames__game:hover {
-    background-color: #24242c; }
+    background-color: #3d3d46; }
   .productGames .productGames__cart {
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ section {
       color: #2e2e3a; }
 
 .footerCart {
-  background-color: #2e2e3a;
+  background-color: #212121;
   box-shadow: 1px 1px 10px 1px black;
   width: 900px;
   height: max-content;
@@ -129,14 +129,15 @@ section {
   .footerCart h3 {
     text-align: center;
     font-size: 1.5rem;
-    margin: 1.5rem 0rem;
+    padding: 1.5rem 0rem;
     color: #f34213;
     font-family: Ubuntu, sans-serif;
-    line-height: 2; }
+    line-height: 2;
+    background-color: black; }
   .footerCart h2 {
+    transition: color 0.2s, background-color 0.2s;
     text-align: center;
     font-size: 1.5rem;
-    margin: 1.5rem 0rem;
-    color: #bbb8b2;
+    color: #f34213;
     font-family: Ubuntu, sans-serif;
     line-height: 2; }
