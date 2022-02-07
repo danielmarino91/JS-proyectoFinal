@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/javascript.ico" />
+    <link rel="shortcut icon" href="images/kyotoIcon.ico" />
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Gugi&family=Inconsolata:wght@500&family=Roboto&family=Ubuntu&display=swap" rel="stylesheet">
     <title>Kyoto Games - Simulador de ventas</title>
 </head>
 
 <body>
+    <button id="buttonclickme">click me</button>
     <header>
         <nav class="navbar">
             <div class="navbar__logo">
@@ -23,129 +25,23 @@
                     <img src="images/moneda.png" alt="moneda">
                 </div>
                 <div class="navbar__wallet--button">
-                    <button onclick="agregarDinero()">Agregar dinero</button>
-                    <button onclick="resetearSaldo()">Resetear dinero</button>
-                    <button onclick="vaciarCarrito()">Vaciar carrito</button>
+                    <button id="agregarSaldo">Agregar saldo</button>
+                    <button id="resetearSaldo">Resetear saldo</button>
+                    <button id="vaciarJuegosComprados">Vaciar juegos comprados</button>
                 </div>
             </div>
         </nav>
     </header>
-
     <section>
-        <div class="productGames">
-            <div class="productGames__game">
-                <img src="images/producto0.png" alt="Crash Bandicoot">
-                <div class="productGames__cart">
-                    <h3 id="producto0"></h3>
-                    <button onclick="comprarJuego(juego0)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto1.png" alt="Cyberpunk 2077">
-                <div class="productGames__cart">
-                    <h3 id="producto1"></h3>
-                    <button onclick="comprarJuego(juego1)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto2.png" alt="DeathLoop">
-                <div class="productGames__cart">
-                    <h3 id="producto2"></h3>
-                    <button onclick="comprarJuego(juego2)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto3.png" alt="Doom Eternal">
-                <div class="productGames__cart">
-                    <h3 id="producto3"></h3>
-                    <button onclick="comprarJuego(juego3)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto4.png" alt="GTA The Trilogy ">
-                <div class="productGames__cart">
-                    <h3 id="producto4"></h3>
-                    <button onclick="comprarJuego(juego4)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto5.png" alt="Guilty Gear Strive">
-                <div class="productGames__cart">
-                    <h3 id="producto5"></h3>
-                    <button onclick="comprarJuego(juego5)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto6.png" alt="It Takes Two">
-                <div class="productGames__cart">
-                    <h3 id="producto6"></h3>
-                    <button onclick="comprarJuego(juego6)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto7.png" alt="Metroid Dread">
-                <div class="productGames__cart">
-                    <h3 id="producto7"></h3>
-                    <button onclick="comprarJuego(juego7)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto8.png" alt="Nioh 2">
-                <div class="productGames__cart">
-                    <h3 id="producto8"></h3>
-                    <button onclick="comprarJuego(juego8)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto9.png" alt="Psychonauts 2 ">
-                <div class="productGames__cart">
-                    <h3 id="producto9"></h3>
-                    <button onclick="comprarJuego(juego9)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto10.png" alt="Crash Bandicoot">
-                <div class="productGames__cart">
-                    <h3 id="producto10"></h3>
-                    <button onclick="comprarJuego(juego10)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto11.png" alt="Resident Evil Village">
-                <div class="productGames__cart">
-                    <h3 id="producto11"></h3>
-                    <button onclick="comprarJuego(juego11)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto12.png" alt="Returnal">
-                <div class="productGames__cart">
-                    <h3 id="producto12"></h3>
-                    <button onclick="comprarJuego(juego12)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto13.png" alt="Spider-Man: Miles Morales">
-                <div class="productGames__cart">
-                    <h3 id="producto13"></h3>
-                    <button onclick="comprarJuego(juego13)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
-            <div class="productGames__game">
-                <img src="images/producto14.png" alt="Yakuza Like a Dragon">
-                <div class="productGames__cart">
-                    <h3 id="producto14"></h3>
-                    <button onclick="comprarJuego(juego14)"><img src="images/carrito.png" alt="carrito"></button>
-                </div>
-            </div>
+        <div id="productGames">
         </div>
-        <div class="footerCart">
-            <h3>Lista de juegos <span id="cantidadJuegos"></span></h3>
+        <div class="gameList">
+            <h3>Juegos comprados <span id="cantidadJuegos"></span></h3>
             <h2 id="misJuegos"></h2>
         </div>
     </section>
 
-    <script src="js/final.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

@@ -3,12 +3,12 @@ let saldoActual = parseInt(localStorage.getItem("saldoGuardado"));
 if (isNaN(saldoActual)) 
     {
         saldoActual = parseInt(0);
-        document.getElementById("saldoActual").innerHTML = saldoActual;
+        $("#saldoActual").html(saldoActual);
         console.log(`Saldo inicial: ${saldoActual}`);
     }
     else
     {
-        document.getElementById("saldoActual").innerHTML = saldoActual;
+        $("#saldoActual").html(saldoActual);
         console.log(`Saldo inicial: ${saldoActual}`);
     }
 
@@ -42,33 +42,56 @@ const juego13 = new juego("Spider-Man: Miles Morales", 9000, "juego13");
 const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
 
 //ARRAY DE OBJETOS
-let listaDeJuegos = [];
-const actLista = JSON.parse(localStorage.getItem("listaEnJSON"));
-listaDeJuegos = actLista;
-document.getElementById("misJuegos").innerHTML = listaDeJuegos.join("</br>");
-document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
+const listaDeJuegos = [juego0, juego1, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10, juego11, juego12, juego13, juego14];
+let juegosComprados = [];
 
-//PRINTEAR NOMBRE Y PRECIO EN EL HTML
-document.getElementById("producto0").innerHTML = juego0.nombre + "</br><span>" + juego0.precio + "</span>";
-document.getElementById("producto1").innerHTML = juego1.nombre + "</br><span>" + juego1.precio + "</span>";
-document.getElementById("producto2").innerHTML = juego2.nombre + "</br><span>" + juego2.precio + "</span>";
-document.getElementById("producto3").innerHTML = juego3.nombre + "</br><span>" + juego3.precio + "</span>";
-document.getElementById("producto4").innerHTML = juego4.nombre + "</br><span>" + juego4.precio + "</span>";
-document.getElementById("producto5").innerHTML = juego5.nombre + "</br><span>" + juego5.precio + "</span>";
-document.getElementById("producto6").innerHTML = juego6.nombre + "</br><span>" + juego6.precio + "</span>";
-document.getElementById("producto7").innerHTML = juego7.nombre + "</br><span>" + juego7.precio + "</span>";
-document.getElementById("producto8").innerHTML = juego8.nombre + "</br><span>" + juego8.precio + "</span>";
-document.getElementById("producto9").innerHTML = juego9.nombre + "</br><span>" + juego9.precio + "</span>";
-document.getElementById("producto10").innerHTML = juego10.nombre + "</br><span>" + juego10.precio + "</span>";
-document.getElementById("producto11").innerHTML = juego11.nombre + "</br><span>" + juego11.precio + "</span>";
-document.getElementById("producto12").innerHTML = juego12.nombre + "</br><span>" + juego12.precio + "</span>";
-document.getElementById("producto13").innerHTML = juego13.nombre + "</br><span>" + juego13.precio + "</span>";
-document.getElementById("producto14").innerHTML = juego14.nombre + "</br><span>" + juego14.precio + "</span>";
+const actLista = JSON.parse(localStorage.getItem("listaEnJSON"));
+juegosComprados = actLista;
+$("#misJuegos").html(juegosComprados.join("</br>"));
+$("#cantidadJuegos").html(`(${juegosComprados.length})`);
+
+//GENERAR JUEGOS EN HTML
+for (let i = 0; i < 15; i++)
+{
+    $(`#productGames`).append(`<div class="productGames__game">
+    <img src="images/producto${i}.png" alt="juego${i}">
+    <div class="productGames__cart">
+        <h3 id="producto${i}"></h3>
+        <button onclick="comprarJuego(juego${i})"><img src="images/carrito.png" alt="carrito"></button> 
+    </div>
+</div>`);
+}
+
+//GENERAR NOMBRES Y PRECIOS EN HTML
+for (let i = 0; i < 15; i++)
+{
+    $(`#producto${i}`).html(listaDeJuegos[i].nombre + "</br><span>" + listaDeJuegos[i].precio + "</span>");
+}
+
+//EVENTOS
+$("#agregarSaldo").on("click", agregarSaldo);
+$("#resetearSaldo").on("click", resetearSaldo);
+$("#vaciarJuegosComprados").on("click", vaciarJuegosComprados);
 
 //METODOS
-function agregarDinero() 
+function agregarSaldo() 
 {
     let saldoAgregado = parseInt(prompt("Ingrese el saldo"));
+    
+    /*
+    $("body").prepend(`
+    <div class="modalBackground"></div>
+    <div class="modalAlert">
+            <h2>Ingrese el saldo que quiere agregar</h2>
+            <input type="text" id="saldoParaAgregar">
+            <p>El valor ingresado no es un numero</p>
+            <div class="modalAlert__buttons">
+                <input type="submit" id="btnAgregar" value="Agregar">Agregar</input>
+                <input type="" id="btnSubmit" value="Cancelar">Cancelar</input>
+            </div>
+    </div>
+    `)
+    */
 
     if (isNaN(saldoAgregado)) 
     {
@@ -82,8 +105,8 @@ function agregarDinero()
     }
     else if (saldoAgregado == 0) 
     {
-        alert("No se agrego dinero a su saldo");
-        console.log("No se agrego dinero a su saldo");
+        alert("No se agrego el saldo");
+        console.log("No se agrego el saldo");
     }
     else 
     {
@@ -91,7 +114,7 @@ function agregarDinero()
         localStorage.setItem("saldoGuardado", saldoActual);
 
         alert(`Su saldo actual es de: ${saldoActual}`);
-        document.getElementById("saldoActual").innerHTML = saldoActual;
+        $("#saldoActual").html(saldoActual);
         console.log(`Recarga de saldo: ${saldoAgregado}`);
         console.log(`Saldo actual: ${saldoActual}`);
     }
@@ -99,6 +122,7 @@ function agregarDinero()
 
 function comprarJuego(juegoElegido) 
 {
+    
     let valorJuego = juegoElegido.precio;
     let saldoEnProceso = saldoActual - valorJuego;
     let restoSaldo = valorJuego - saldoActual;
@@ -119,17 +143,17 @@ function comprarJuego(juegoElegido)
     {
         saldoActual = saldoEnProceso;
         localStorage.setItem("saldoGuardado", saldoActual);
-        listaDeJuegos.push(juegoElegido.nombre);
+        juegosComprados.push(juegoElegido.nombre);
         
         alert(`Felicidades, acabas de comprar: ${juegoElegido.nombre}`);
-        document.getElementById("saldoActual").innerHTML = saldoActual;
-        document.getElementById("misJuegos").innerHTML = listaDeJuegos.join("</br>");
-        document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
+        $("#saldoActual").html(saldoActual); 
+        $("#misJuegos").html(juegosComprados.join("</br>"));
+        $("#cantidadJuegos").html(`(${juegosComprados.length})`);
         console.log(`El usuario acaba de comprar el juego ${juegoElegido.nombre} y su saldo ahora es de ${saldoActual}`);
-        console.log(`Juegos comprados: ${listaDeJuegos.length}`);
+        console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
 
-    const listaEnJSON = JSON.stringify(listaDeJuegos);
+    const listaEnJSON = JSON.stringify(juegosComprados);
     localStorage.setItem("listaEnJSON", listaEnJSON);
 }
 
@@ -138,26 +162,26 @@ function resetearSaldo()
     saldoActual = parseInt(0);
     localStorage.setItem("saldoGuardado", saldoActual);
     
-    document.getElementById("saldoActual").innerHTML = saldoActual;
+    $("#saldoActual").html(saldoActual);
     console.log("Se reseteo el saldo a 0");
 }
 
-function vaciarCarrito()
+function vaciarJuegosComprados()
 {
-    listaDeJuegos.length = 0;
-    const vaciarListaEnJSON = JSON.stringify(listaDeJuegos);
+    juegosComprados.length = 0;
+    const vaciarListaEnJSON = JSON.stringify(juegosComprados);
     localStorage.setItem("listaEnJSON", vaciarListaEnJSON);
 
-    document.getElementById("misJuegos").innerHTML = listaDeJuegos.join();
-    document.getElementById("cantidadJuegos").innerHTML = `(${listaDeJuegos.length})`;
-    console.log(`Se vacio la lista, ahora tienes ${listaDeJuegos.length} juegos`);
+    $("#misJuegos").html(juegosComprados.join());
+    $("#cantidadJuegos").html(`(${juegosComprados.length})`);
+    console.log(`Se vacio la lista de juegos comprados, ahora tienes ${juegosComprados.length} juegos`);
 }
 
 function comprobarJuego(juegoVariable)
 {
     localStorage.getItem("listaDeJuegos");
     let identificarJuego = juegoVariable.nombre;
-    let buscarJuegoEnArray = listaDeJuegos.find(x => x === juegoVariable.nombre);
+    let buscarJuegoEnArray = juegosComprados.find(x => x === juegoVariable.nombre);
 
     if (identificarJuego == buscarJuegoEnArray) 
     {
