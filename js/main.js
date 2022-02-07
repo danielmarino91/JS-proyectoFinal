@@ -39,7 +39,7 @@ comprobarJuegosComprados()
 for (let i = 0; i < 15; i++)
 {
     $(`#productGames`).append(`<div class="productGames__game">
-    <img src="images/producto${i}.png" alt="juego${i}">
+    <img src="images/producto${i}.png" alt="${listaDeJuegos[i].nombre}">
     <div class="productGames__cart">
         <h3 id="producto${i}"></h3>
         <button id="comprarJuego${i}"><img src="images/carrito.png" alt="carrito"></button> 
@@ -121,12 +121,12 @@ function comprarJuego(juegoElegido)
     if (saldoEnProceso < 0) 
     {
         alert(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
-        console.log(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
+        console.log(`Necesita ${restoSaldo} para realizar la compra de ${juegoElegido.nombre}`);
     } 
     else if (juegoRepetido == true) 
     {
-        alert(`Ya tienes ${juegoElegido.nombre} en tu lista de juegos`);
-        console.log(`Ya tienes ${juegoElegido.nombre} en tu lista de juegos`);        
+        alert(`Ya adquiriste ${juegoElegido.nombre}`);
+        console.log(`Ya adquiriste ${juegoElegido.nombre}`);        
     }
     else 
     {
@@ -138,7 +138,7 @@ function comprarJuego(juegoElegido)
         $("#saldoActual").html(saldoActual); 
         $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
-        console.log(`El usuario acaba de comprar el juego ${juegoElegido.nombre} y su saldo ahora es de ${saldoActual}`);
+        console.log(`Juego comprado: ${juegoElegido.nombre}, Nuevo saldo: ${saldoActual}`);
         console.log(`Juegos comprados: ${juegosComprados.length}`);
         let juegosCompradosJSON = JSON.stringify(juegosComprados);
         localStorage.setItem("juegosAdquiridos", juegosCompradosJSON);
@@ -151,7 +151,7 @@ function resetearSaldo()
     localStorage.setItem("saldoGuardado", saldoActual);
     
     $("#saldoActual").html(saldoActual);
-    console.log("Se reseteo el saldo a 0");
+    console.log(`Se reseteo el saldo, nuevo saldo: ${saldoActual}`);
 }
 
 function vaciarJuegosComprados()
@@ -160,7 +160,7 @@ function vaciarJuegosComprados()
 
     $("#listaJuegosComprados").html(juegosComprados.join());
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
-    console.log(`Se vacio la lista de juegos comprados, ahora tienes ${juegosComprados.length} juegos`);
+    console.log(`Se vacio la lista de juegos, nueva cantidad: ${juegosComprados.length}`);
     let listaVaciaJSON = JSON.stringify(juegosComprados);
     localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
 }
