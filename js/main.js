@@ -45,11 +45,6 @@ const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
 const listaDeJuegos = [juego0, juego1, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10, juego11, juego12, juego13, juego14];
 let juegosComprados = [];
 
-const actLista = JSON.parse(localStorage.getItem("listaEnJSON"));
-juegosComprados = actLista;
-$("#misJuegos").html(juegosComprados.join("</br>"));
-$("#cantidadJuegos").html(`(${juegosComprados.length})`);
-
 //GENERAR JUEGOS EN HTML
 for (let i = 0; i < 15; i++)
 {
@@ -147,14 +142,11 @@ function comprarJuego(juegoElegido)
         
         alert(`Felicidades, acabas de comprar: ${juegoElegido.nombre}`);
         $("#saldoActual").html(saldoActual); 
-        $("#misJuegos").html(juegosComprados.join("</br>"));
+        $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
         console.log(`El usuario acaba de comprar el juego ${juegoElegido.nombre} y su saldo ahora es de ${saldoActual}`);
         console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
-
-    const listaEnJSON = JSON.stringify(juegosComprados);
-    localStorage.setItem("listaEnJSON", listaEnJSON);
 }
 
 function resetearSaldo()
@@ -169,10 +161,8 @@ function resetearSaldo()
 function vaciarJuegosComprados()
 {
     juegosComprados.length = 0;
-    const vaciarListaEnJSON = JSON.stringify(juegosComprados);
-    localStorage.setItem("listaEnJSON", vaciarListaEnJSON);
 
-    $("#misJuegos").html(juegosComprados.join());
+    $("#listaJuegosComprados").html(juegosComprados.join());
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
     console.log(`Se vacio la lista de juegos comprados, ahora tienes ${juegosComprados.length} juegos`);
 }
