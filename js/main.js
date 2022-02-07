@@ -1,18 +1,6 @@
 let saldoActual = parseInt(localStorage.getItem("saldoGuardado"));
 
-if (isNaN(saldoActual)) 
-    {
-        saldoActual = parseInt(0);
-        $("#saldoActual").html(saldoActual);
-        console.log(`Saldo inicial: ${saldoActual}`);
-    }
-    else
-    {
-        $("#saldoActual").html(saldoActual);
-        console.log(`Saldo inicial: ${saldoActual}`);
-    }
-
-let juegoRepetido = false;
+comprobarSaldo()
 
 class juego 
 {
@@ -41,9 +29,9 @@ const juego12 = new juego("Returnal", 10400, "juego12");
 const juego13 = new juego("Spider-Man: Miles Morales", 9000, "juego13");
 const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
 
-//ARRAY DE OBJETOS
 const listaDeJuegos = [juego0, juego1, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10, juego11, juego12, juego13, juego14];
 let juegosComprados = [];
+let juegoRepetido = false;
 
 comprobarJuegosComprados()
 
@@ -54,7 +42,7 @@ for (let i = 0; i < 15; i++)
     <img src="images/producto${i}.png" alt="juego${i}">
     <div class="productGames__cart">
         <h3 id="producto${i}"></h3>
-        <button onclick="comprarJuego(juego${i})"><img src="images/carrito.png" alt="carrito"></button> 
+        <button id="comprarJuego${i}"><img src="images/carrito.png" alt="carrito"></button> 
     </div>
 </div>`);
 }
@@ -69,6 +57,10 @@ for (let i = 0; i < 15; i++)
 $("#agregarSaldo").on("click", agregarSaldo);
 $("#resetearSaldo").on("click", resetearSaldo);
 $("#vaciarJuegosComprados").on("click", vaciarJuegosComprados);
+for (let i = 0; i < 15; i++)
+{
+    $(`#comprarJuego${i}`).on("click", function(){comprarJuego(listaDeJuegos[i])});
+}
 
 //METODOS
 function agregarSaldo() 
@@ -186,6 +178,21 @@ function comprobarJuego(juegoVariable)
     else
     {
         return juegoRepetido = false;
+    }
+}
+
+function comprobarSaldo()
+{
+    if (isNaN(saldoActual)) 
+    {
+        saldoActual = parseInt(0);
+        $("#saldoActual").html(saldoActual);
+        console.log(`Saldo inicial: ${saldoActual}`);
+    }
+    else
+    {
+        $("#saldoActual").html(saldoActual);
+        console.log(`Saldo inicial: ${saldoActual}`);
     }
 }
 
