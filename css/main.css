@@ -211,3 +211,25 @@ section {
     margin: 1rem;
     color: crimson;
     font-size: 1.2rem; }
+
+#notifications {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  height: 500px;
+  right: 1vh;
+  bottom: 1vh;
+  overflow: hidden; }
+
+.generateNotification {
+  margin: 0.3rem auto 0.3rem auto;
+  padding: 1rem 1rem;
+  width: 300px;
+  height: max-content;
+  background-color: #f34213;
+  color: black;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-family: Ubuntu, sans-serif;
+  z-index: 4; }

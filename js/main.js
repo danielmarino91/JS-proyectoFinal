@@ -71,12 +71,12 @@ function agregarSaldo()
     $("body").prepend(`
     <div class="modalBackground"></div>
     <div class="modalAlert">
-            <h2>Ingrese el saldo que quiere agregar</h2>
+            <h2>Ingrese el saldo a agregar</h2>
             <input type="text" id="saldoParaAgregar">
             <p>El valor ingresado no es un numero</p>
             <div class="modalAlert__buttons">
-                <input type="submit" id="btnAgregar" value="Agregar">Agregar</input>
-                <input type="" id="btnSubmit" value="Cancelar">Cancelar</input>
+                <button type="submit" id="btnAgregar" value="Agregar">Agregar</button>
+                <button type="" id="btnSubmit" value="Cancelar">Cancelar</button>
             </div>
     </div>
     `)
@@ -84,25 +84,25 @@ function agregarSaldo()
 
     if (isNaN(saldoAgregado)) 
     {
-        alert("El valor ingresado no es un número");
+        generarAlerta("El valor ingresado no es un número");
         console.log("El valor ingresado no es un número");
     }
     else if (saldoAgregado < 0) 
     {
-        alert("No se aceptan valores negativos");
+        generarAlerta("No se aceptan valores negativos");
         console.log("No se aceptan valores negativos");
     }
     else if (saldoAgregado == 0) 
     {
-        alert("No se agrego el saldo");
-        console.log("No se agrego el saldo");
+        generarAlerta("No se agrego saldo");
+        console.log("No se agrego saldo");
     }
     else 
     {
         saldoActual = saldoActual + saldoAgregado;
         localStorage.setItem("saldoGuardado", saldoActual);
 
-        alert(`Su saldo actual es de: ${saldoActual}`);
+        generarAlerta(`Su saldo actual es de: ${saldoActual}`);
         $("#saldoActual").html(saldoActual);
         console.log(`Recarga de saldo: ${saldoAgregado}`);
         console.log(`Saldo actual: ${saldoActual}`);
@@ -120,12 +120,12 @@ function comprarJuego(juegoElegido)
     
     if (saldoEnProceso < 0) 
     {
-        alert(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
+        generarAlerta(`Saldo insuficiente, necesita ${restoSaldo} mas para realizar la compra de ${juegoElegido.nombre}`);
         console.log(`Necesita ${restoSaldo} para realizar la compra de ${juegoElegido.nombre}`);
     } 
     else if (juegoRepetido == true) 
     {
-        alert(`Ya adquiriste ${juegoElegido.nombre}`);
+        generarAlerta(`Ya adquiriste ${juegoElegido.nombre}`);
         console.log(`Ya adquiriste ${juegoElegido.nombre}`);        
     }
     else 
@@ -134,7 +134,7 @@ function comprarJuego(juegoElegido)
         localStorage.setItem("saldoGuardado", saldoActual);
         juegosComprados.push(juegoElegido.nombre);
         
-        alert(`Felicidades, acabas de comprar: ${juegoElegido.nombre}`);
+        generarAlerta(`Felicidades, acabas de comprar: ${juegoElegido.nombre}`);
         $("#saldoActual").html(saldoActual); 
         $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
@@ -148,8 +148,8 @@ function comprarJuego(juegoElegido)
 function resetearSaldo()
 {
     saldoActual = parseInt(0);
+    generarAlerta("Se reseteo el saldo");
     localStorage.setItem("saldoGuardado", saldoActual);
-    
     $("#saldoActual").html(saldoActual);
     console.log(`Se reseteo el saldo, nuevo saldo: ${saldoActual}`);
 }
@@ -157,9 +157,9 @@ function resetearSaldo()
 function vaciarJuegosComprados()
 {
     juegosComprados.length = 0;
-
     $("#listaJuegosComprados").html(juegosComprados.join());
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
+    generarAlerta("Se vacio la lista de juegos");
     console.log(`Se vacio la lista de juegos, nueva cantidad: ${juegosComprados.length}`);
     let listaVaciaJSON = JSON.stringify(juegosComprados);
     localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
@@ -214,4 +214,16 @@ function comprobarJuegosComprados()
     }
     $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
+}
+
+function generarAlerta(variableMessage)
+{
+    $("#notifications").append(`
+    <div class="generateNotification" style="display: none">${variableMessage}</div>
+    `)
+    $(".generateNotification").slideDown(350).delay(5000).slideUp(350);
+    setTimeout(function(){
+        $(".generateNotification:first-child").remove()
+    }, 5700)
+    
 }
