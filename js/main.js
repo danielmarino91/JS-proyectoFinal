@@ -45,6 +45,8 @@ const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
 const listaDeJuegos = [juego0, juego1, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10, juego11, juego12, juego13, juego14];
 let juegosComprados = [];
 
+comprobarJuegosComprados()
+
 //GENERAR JUEGOS EN HTML
 for (let i = 0; i < 15; i++)
 {
@@ -146,6 +148,8 @@ function comprarJuego(juegoElegido)
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
         console.log(`El usuario acaba de comprar el juego ${juegoElegido.nombre} y su saldo ahora es de ${saldoActual}`);
         console.log(`Juegos comprados: ${juegosComprados.length}`);
+        let juegosCompradosJSON = JSON.stringify(juegosComprados);
+        localStorage.setItem("juegosAdquiridos", juegosCompradosJSON);
     }
 }
 
@@ -165,6 +169,8 @@ function vaciarJuegosComprados()
     $("#listaJuegosComprados").html(juegosComprados.join());
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
     console.log(`Se vacio la lista de juegos comprados, ahora tienes ${juegosComprados.length} juegos`);
+    let listaVaciaJSON = JSON.stringify(juegosComprados);
+    localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
 }
 
 function comprobarJuego(juegoVariable)
@@ -181,4 +187,24 @@ function comprobarJuego(juegoVariable)
     {
         return juegoRepetido = false;
     }
+}
+
+function comprobarJuegosComprados()
+{
+    let arrayLocal = JSON.parse(localStorage.getItem(`juegosAdquiridos`));
+
+    if (arrayLocal == null)
+    {
+        console.log(`Juegos comprados: ${juegosComprados.length}`);
+    }
+    else
+    {
+        for (let valor of arrayLocal)
+        {
+            juegosComprados.push(valor);
+        }
+        console.log(`Juegos comprados: ${juegosComprados.length}`);
+    }
+    $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
+    $("#cantidadJuegos").html(`(${juegosComprados.length})`);
 }
