@@ -216,11 +216,12 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: absolute;
-  height: 500px;
+  position: fixed;
+  height: 450px;
   right: 1vh;
   bottom: 1vh;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 4; }
 
 .generateNotification {
   margin: 0.3rem auto 0.3rem auto;
@@ -231,5 +232,4 @@ section {
   color: black;
   border-radius: 4px;
   font-size: 1.2rem;
-  font-family: Ubuntu, sans-serif;
-  z-index: 4; }
+  font-family: Ubuntu, sans-serif; }
