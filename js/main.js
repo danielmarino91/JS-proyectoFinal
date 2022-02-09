@@ -57,6 +57,7 @@ for (let i = 0; i < 15; i++)
 $("#agregarSaldo").on("click", agregarSaldo);
 $("#resetearSaldo").on("click", resetearSaldo);
 $("#vaciarJuegosComprados").on("click", vaciarJuegosComprados);
+
 for (let i = 0; i < 15; i++)
 {
     $(`#comprarJuego${i}`).on("click", function(){comprarJuego(listaDeJuegos[i])});
@@ -65,37 +66,62 @@ for (let i = 0; i < 15; i++)
 //METODOS
 function agregarSaldo() 
 {
-    let saldoAgregado = parseInt(prompt("Ingrese el saldo"));
-    
-    /*
-    $("body").prepend(`
+    $("#addBalance").prepend(`
     <div class="modalBackground"></div>
-    <div class="modalAlert">
-            <h2>Ingrese el saldo a agregar</h2>
-            <input type="text" id="saldoParaAgregar">
-            <p>El valor ingresado no es un numero</p>
-            <div class="modalAlert__buttons">
-                <button type="submit" id="btnAgregar" value="Agregar">Agregar</button>
-                <button type="" id="btnSubmit" value="Cancelar">Cancelar</button>
-            </div>
+    <div id="modalAlert">
+        <h2>Ingrese el saldo</h2>
+        <input type="text" name="nuevoSaldo" id="nuevoSaldo"></input>
+        <p id="errorMessage"></p>
+        <div class="modalAlert__buttons">
+            <button type="submit" id="btnSubmit" value="Agregar">Agregar</button>
+            <button type="button" id="btnCancelar" value="Cancelar">Cancelar</button>
+        </div>
     </div>
     `)
-    */
+
+    $("#nuevoSaldo").focus();    
+    $("#btnSubmit").click(extraerValor);
+    $("#btnCancelar").click(quitarModal);
+    $("#nuevoSaldo").keyup(function(e)
+    {
+        if(e.keyCode == 13)
+        {
+            extraerValor();
+        }
+        else if (e.keyCode == 27)
+        {
+            quitarModal();
+        }
+    });
+}
+
+function extraerValor()
+{
+    let saldoAgregado = parseInt($("#nuevoSaldo").val());
 
     if (isNaN(saldoAgregado)) 
     {
+        $("#errorMessage").html("El valor ingresado no es un número");
         generarAlerta("El valor ingresado no es un número");
         console.log("El valor ingresado no es un número");
+        $("#nuevoSaldo").val('');
+        $("#nuevoSaldo").focus();
     }
     else if (saldoAgregado < 0) 
     {
+        $("#errorMessage").html("No se aceptan valores negativos");
         generarAlerta("No se aceptan valores negativos");
         console.log("No se aceptan valores negativos");
+        $("#nuevoSaldo").val('');
+        $("#nuevoSaldo").focus();
     }
     else if (saldoAgregado == 0) 
     {
-        generarAlerta("No se agrego saldo");
-        console.log("No se agrego saldo");
+        $("#errorMessage").html("Debe ingresar un número mayor a 0");
+        generarAlerta("Debe ingresar un número mayor a 0");
+        console.log("Debe ingresar un número mayor a 0");
+        $("#nuevoSaldo").val('');
+        $("#nuevoSaldo").focus();
     }
     else 
     {
@@ -106,6 +132,7 @@ function agregarSaldo()
         $("#saldoActual").html(saldoActual);
         console.log(`Recarga de saldo: ${saldoAgregado}`);
         console.log(`Saldo actual: ${saldoActual}`);
+        quitarModal();
     }
 }
 
@@ -227,3 +254,10 @@ function generarAlerta(variableMessage)
     }, 5700)
     
 }
+
+function quitarModal()
+{
+    $(".modalBackground").remove()
+    $("#modalAlert").remove()
+}
+

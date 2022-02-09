@@ -68,6 +68,40 @@ section {
         border: 2px solid white;
         color: #2e2e3a; }
 
+.gameList {
+  background-color: #212121;
+  box-shadow: 1px 1px 10px 1px black;
+  width: 900px;
+  height: max-content;
+  right: 0;
+  z-index: 1; }
+  .gameList h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    color: #f34213;
+    font-family: Ubuntu, sans-serif;
+    line-height: 2;
+    background-color: black; }
+  .gameList h2 {
+    transition: color 0.2s, background-color 0.2s;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f34213;
+    font-family: Ubuntu, sans-serif;
+    line-height: 2; }
+
+.generateNotification {
+  margin: 0.3rem auto 0.3rem auto;
+  padding: 1rem 1rem;
+  width: 300px;
+  height: max-content;
+  background-color: #f34213;
+  color: black;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-family: Ubuntu, sans-serif; }
+
 #productGames {
   display: flex;
   flex-flow: row wrap;
@@ -119,30 +153,18 @@ section {
       border: 3px solid white;
       color: #2e2e3a; }
 
-.gameList {
-  background-color: #212121;
-  box-shadow: 1px 1px 10px 1px black;
-  width: 900px;
-  height: max-content;
-  right: 0;
-  z-index: 1; }
-  .gameList h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 0.8rem;
-    color: #f34213;
-    font-family: Ubuntu, sans-serif;
-    line-height: 2;
-    background-color: black; }
-  .gameList h2 {
-    transition: color 0.2s, background-color 0.2s;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #f34213;
-    font-family: Ubuntu, sans-serif;
-    line-height: 2; }
+#notifications {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: fixed;
+  height: 450px;
+  right: 1vh;
+  bottom: 1vh;
+  overflow: hidden;
+  z-index: 4; }
 
-.modalBackground {
+#addBalance .modalBackground {
   position: fixed;
   z-index: 2;
   width: 100%;
@@ -151,7 +173,7 @@ section {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5); }
 
-.modalAlert {
+#modalAlert {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,11 +193,11 @@ section {
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto; }
-  .modalAlert .modalAlert__buttons {
+  #modalAlert .modalAlert__buttons {
     display: flex;
     flex-direction: row;
     margin: 1rem; }
-    .modalAlert .modalAlert__buttons button {
+    #modalAlert .modalAlert__buttons button {
       background-color: #2e2e3a;
       border: 2px solid #f34213;
       padding: 0.6rem;
@@ -183,21 +205,21 @@ section {
       font-size: 1.2rem;
       margin: 0rem 1rem;
       transition: border 0.2s, color 0.2s, background-color 0.2s; }
-    .modalAlert .modalAlert__buttons button:hover {
+    #modalAlert .modalAlert__buttons button:hover {
       background-color: #f34213;
       border: 2px solid #f34213;
       color: #2e2e3a;
       cursor: pointer; }
-    .modalAlert .modalAlert__buttons button:active {
+    #modalAlert .modalAlert__buttons button:active {
       background-color: white;
       border: 2px solid white;
       color: #2e2e3a; }
-  .modalAlert h2 {
+  #modalAlert h2 {
     padding: 1rem;
     text-align: center;
     color: #f34213;
-    font-family: AudioWide, sans-serif; }
-  .modalAlert input {
+    font-family: Roboto, sans-serif; }
+  #modalAlert input {
     background-color: #1f1f27;
     border: 2px solid #f34213;
     color: #f34213;
@@ -206,30 +228,8 @@ section {
     padding: 0.5rem;
     font-size: 1rem;
     outline: none;
-    font-family: AudioWide, sans-serif; }
-  .modalAlert p {
+    font-family: Roboto, sans-serif; }
+  #modalAlert p {
     margin: 1rem;
     color: crimson;
     font-size: 1.2rem; }
-
-#notifications {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: fixed;
-  height: 450px;
-  right: 1vh;
-  bottom: 1vh;
-  overflow: hidden;
-  z-index: 4; }
-
-.generateNotification {
-  margin: 0.3rem auto 0.3rem auto;
-  padding: 1rem 1rem;
-  width: 300px;
-  height: max-content;
-  background-color: #f34213;
-  color: black;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  font-family: Ubuntu, sans-serif; }
