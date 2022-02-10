@@ -223,6 +223,10 @@ function abrirPokebola()
     $("#pokebola").remove();
     console.log("Se abrio la Pokebola...");
 
+    $("#pokemodalAlert").prepend(`
+        <h2 id="temporalMessage">Abriendo Pokebola...</h2> 
+        `)
+
     function generarNumeroRandom(min, max) {
         return Math.random() * (max - min) + min;
     }
@@ -232,6 +236,9 @@ function abrirPokebola()
     $.get(`https://pokeapi.co/api/v2/pokemon/${numeroPokemon}`, (res) =>
     {
         let nombreMayus = res.name.toUpperCase();
+
+        $("#temporalMessage").remove();
+
         $("#pokemodalAlert").prepend(`
         <h2>Felicidades! Obtuviste un <span>${nombreMayus}</span></h2>
         <img src="${res.sprites.front_default}" alt="Pokemon"> 
