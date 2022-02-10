@@ -50,34 +50,34 @@
         }
 
         button
-            {
-                background-color: #2e2e3a;
-                border: 3px solid #f34213;
-                padding: 0.5rem;
-                width: 240px;
-                height: 96px;
-                transition: border 0.2s, color 0.2s, background-color 0.2s;
+        {
+            background-color: #2e2e3a;
+            border: 3px solid #f34213;
+            padding: 0.5rem;
+            width: 240px;
+            height: 96px;
+            transition: border 0.2s, color 0.2s, background-color 0.2s;
 
-                img
-                {
-                    border: none;
-                }
-            }
-
-            button:hover
+            img
             {
-                background-color: #f34213;
-                border: 3px solid #f34213;
-                color: #2e2e3a;
-                cursor: pointer;
+                border: none;
             }
+        }
 
-            button:active
-            {
-                background-color: #2e2e3a;
-                border: 3px solid white;
-                color: #2e2e3a;
-            }
+        button:hover
+        {
+            background-color: #f34213;
+            border: 3px solid #f34213;
+            color: #2e2e3a;
+            cursor: pointer;
+        }
+
+        button:active
+        {
+            background-color: #2e2e3a;
+            border: 3px solid white;
+            color: #2e2e3a;
+        }
     }
 }
 
@@ -87,11 +87,17 @@
     flex-direction: column;
     justify-content: flex-end;
     position: fixed;
-    height: 450px;
+    height: 449px;
     right: 1vh;
     bottom: 1vh;
     overflow: hidden;
     z-index: 4;
+
+    span
+    {
+        color: $color-7;
+        font-weight: bold;
+    }
 }
 
 #addBalance
@@ -114,7 +120,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 420px;
     height: 250px;
     position: fixed;
     z-index: 3;
@@ -134,7 +140,6 @@
     {
         display: flex;
         flex-direction: row;
-        margin: 1rem;
 
         button
         {
@@ -165,7 +170,7 @@
 
     h2
     {
-        padding: 1rem;
+        padding-bottom: 1rem;
         text-align: center;
         color: $color-3;
         font-family: $fontMain;
@@ -176,18 +181,138 @@
         background-color: $color-7;
         border: 2px solid $color-3;
         color: $color-3;
-        width: 80%;
+        width: 50%;
         text-align: center;
         padding: 0.5rem;
-        font-size: 1rem;
+        font-size: 1.5rem;
         outline: none;
         font-family: $fontMain;
     }
 
     p
     {
-        margin: 1rem;
-        color: crimson;
+        padding: 0.4rem;
+        margin: 0.5rem;
+        color: red;
         font-size: 1.2rem;
+    }
+}
+
+#pokeButton
+{
+    background-color: #ffffff;
+    border: 2px solid #ef3e33;
+    border-radius: 20px;
+    padding: 0.6rem;
+    margin: 0rem 0.5rem;
+    color: #ef3e33;
+    font-size: 1.2rem;
+    transition: border 0.2s, color 0.2s, background-color 0.2s;
+}
+
+#pokeButton:hover
+{
+    background-color: #ef3e33;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#pokeButton:active
+{
+    background-color: #57575a;
+    border: 2px solid #57575a;
+    color: #ffffff;
+}
+
+#buyPokeball
+{
+    .pokemodalBackground
+    {
+        position: fixed;
+        z-index: 2;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    #pokemodalAlert
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 500px;
+        height: 400px;
+        position: fixed;
+        z-index: 3;
+        background-color: #2e2e3a;
+        border: 2px solid #f34213;
+        box-shadow: 0px 1px 5px 1px black;
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        h2
+        {
+            padding: 1rem;
+            text-align: center;
+            color: $color-3;
+            font-family: $fontMain;
+            margin: 1rem 1rem 1rem 0rem;
+        }
+
+        span
+        {
+            color: white;
+            font-weight: bold;
+        }
+
+        img
+        {
+            width: 200px;
+            object-fit: cover;
+            margin: 0rem 1rem 1rem 1rem;
+        }
+        
+        .pokemodalAlert__buttons
+        {
+            display: flex;
+            flex-direction: row;
+            margin: 1rem;
+
+            button
+            {
+                background-color: #2e2e3a;
+                border: 2px solid #f34213;
+                padding: 0.6rem;
+                color: #f34213;
+                font-size: 1.2rem;
+                margin: 0rem 1rem;
+                transition: border 0.2s, color 0.2s, background-color 0.2s;
+            }
+
+            button:hover
+            {
+                background-color: #f34213;
+                border: 2px solid #f34213;
+                color: #2e2e3a;
+                cursor: pointer;
+            }
+
+            button:active
+            {
+                background-color: white;
+                border: 2px solid white;
+                color: #2e2e3a;
+            }
+        }
     }
 }

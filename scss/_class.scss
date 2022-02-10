@@ -59,6 +59,15 @@
                 color: #f34213;
                 font-size: 1.2rem;
                 transition: border 0.2s, color 0.2s, background-color 0.2s;
+
+                img
+                {
+                    width: 22px;
+                    height: 22px;
+                    transform: translate(0px, 3px);
+                    margin: 0rem 0rem 0rem 0.3rem;
+                    object-fit: cover;
+                }
             }
 
             button:hover
@@ -119,7 +128,7 @@
     width: 300px;
     height: max-content;
     background-color: $color-3;
-    color: black;
+    color: white;
     border-radius: 4px;
     font-size: 1.2rem;
     font-family: $fontMain2;

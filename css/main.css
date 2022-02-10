@@ -58,6 +58,12 @@ section {
         color: #f34213;
         font-size: 1.2rem;
         transition: border 0.2s, color 0.2s, background-color 0.2s; }
+        .navbar .navbar__wallet .navbar__wallet--button button img {
+          width: 22px;
+          height: 22px;
+          transform: translate(0px, 3px);
+          margin: 0rem 0rem 0rem 0.3rem;
+          object-fit: cover; }
       .navbar .navbar__wallet .navbar__wallet--button button:hover {
         background-color: #f34213;
         border: 2px solid #f34213;
@@ -97,7 +103,7 @@ section {
   width: 300px;
   height: max-content;
   background-color: #f34213;
-  color: black;
+  color: white;
   border-radius: 4px;
   font-size: 1.2rem;
   font-family: Ubuntu, sans-serif; }
@@ -158,11 +164,14 @@ section {
   flex-direction: column;
   justify-content: flex-end;
   position: fixed;
-  height: 450px;
+  height: 449px;
   right: 1vh;
   bottom: 1vh;
   overflow: hidden;
   z-index: 4; }
+  #notifications span {
+    color: #1f1f27;
+    font-weight: bold; }
 
 #addBalance .modalBackground {
   position: fixed;
@@ -178,7 +187,7 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
+  width: 420px;
   height: 250px;
   position: fixed;
   z-index: 3;
@@ -195,8 +204,7 @@ section {
   margin-bottom: auto; }
   #modalAlert .modalAlert__buttons {
     display: flex;
-    flex-direction: row;
-    margin: 1rem; }
+    flex-direction: row; }
     #modalAlert .modalAlert__buttons button {
       background-color: #2e2e3a;
       border: 2px solid #f34213;
@@ -215,7 +223,7 @@ section {
       border: 2px solid white;
       color: #2e2e3a; }
   #modalAlert h2 {
-    padding: 1rem;
+    padding-bottom: 1rem;
     text-align: center;
     color: #f34213;
     font-family: Roboto, sans-serif; }
@@ -223,13 +231,99 @@ section {
     background-color: #1f1f27;
     border: 2px solid #f34213;
     color: #f34213;
-    width: 80%;
+    width: 50%;
     text-align: center;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     outline: none;
     font-family: Roboto, sans-serif; }
   #modalAlert p {
-    margin: 1rem;
-    color: crimson;
+    padding: 0.4rem;
+    margin: 0.5rem;
+    color: red;
     font-size: 1.2rem; }
+
+#pokeButton {
+  background-color: #ffffff;
+  border: 2px solid #ef3e33;
+  border-radius: 20px;
+  padding: 0.6rem;
+  margin: 0rem 0.5rem;
+  color: #ef3e33;
+  font-size: 1.2rem;
+  transition: border 0.2s, color 0.2s, background-color 0.2s; }
+
+#pokeButton:hover {
+  background-color: #ef3e33;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer; }
+
+#pokeButton:active {
+  background-color: #57575a;
+  border: 2px solid #57575a;
+  color: #ffffff; }
+
+#buyPokeball .pokemodalBackground {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+#buyPokeball #pokemodalAlert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 400px;
+  position: fixed;
+  z-index: 3;
+  background-color: #2e2e3a;
+  border: 2px solid #f34213;
+  box-shadow: 0px 1px 5px 1px black;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto; }
+  #buyPokeball #pokemodalAlert h2 {
+    padding: 1rem;
+    text-align: center;
+    color: #f34213;
+    font-family: Roboto, sans-serif;
+    margin: 1rem 1rem 1rem 0rem; }
+  #buyPokeball #pokemodalAlert span {
+    color: white;
+    font-weight: bold; }
+  #buyPokeball #pokemodalAlert img {
+    width: 200px;
+    object-fit: cover;
+    margin: 0rem 1rem 1rem 1rem; }
+  #buyPokeball #pokemodalAlert .pokemodalAlert__buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem; }
+    #buyPokeball #pokemodalAlert .pokemodalAlert__buttons button {
+      background-color: #2e2e3a;
+      border: 2px solid #f34213;
+      padding: 0.6rem;
+      color: #f34213;
+      font-size: 1.2rem;
+      margin: 0rem 1rem;
+      transition: border 0.2s, color 0.2s, background-color 0.2s; }
+    #buyPokeball #pokemodalAlert .pokemodalAlert__buttons button:hover {
+      background-color: #f34213;
+      border: 2px solid #f34213;
+      color: #2e2e3a;
+      cursor: pointer; }
+    #buyPokeball #pokemodalAlert .pokemodalAlert__buttons button:active {
+      background-color: white;
+      border: 2px solid white;
+      color: #2e2e3a; }
