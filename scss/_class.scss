@@ -10,18 +10,57 @@
     {
         margin: auto 1.2rem;
     }
+
+    .navbar__gameFinder
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: $color-7;
+        height: max-content;
+        margin: auto 0rem;
+
+        input
+        {
+            background-color: $color-7;
+            padding: 0.5rem 0.5rem 0.5rem 1rem ;
+            border: none;
+            width: 690px;
+            height: max-content;
+            color: $color-3;
+            font-size: 1.2rem;
+            font-weight: bold;
+            outline: none;
+        }
+
+        img
+        {
+            margin: 0.8rem 0rem 0.8rem 0.8rem;
+        }
+
+        button:hover
+        {
+            background-color: $color-3;
+        }
+
+        button:active
+        {
+            background-color: $color-0;
+        }
+    }
     
     .navbar__wallet
     {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         margin: 1rem 2rem 1rem 0rem;
         
         .navbar__wallet--balance
         {
             display: flex;
             flex-direction: row;
+            align-items: center;
 
             p
             {
@@ -45,6 +84,32 @@
                 height: 22px;
                 object-fit: cover;
                 margin: 0.3rem 0.5rem;
+            }
+
+            button
+            {
+                transition: border 0.2s, color 0.2s, background-color 0.2s;
+                background-color: #2e2e3a;
+                border: 2px solid #f34213;
+                padding: 0.6rem;
+                color: #f34213;
+                font-size: 1.2rem;
+                margin: 0rem 0.2rem 0rem 0.2rem;
+            }
+
+            button:hover
+            {
+                background-color: #f34213;
+                border: 2px solid #f34213;
+                color: #2e2e3a;
+                cursor: pointer;
+            }
+
+            button:active
+            {
+                background-color: white;
+                border: 2px solid white;
+                color: #2e2e3a;
             }
         }
         .navbar__wallet--button
@@ -91,32 +156,21 @@
 
 .gameList
 {
+    display: none;
     background-color: #212121;
-    box-shadow: 1px 1px 10px 1px black;
-    width: 900px;
-    height: max-content;
-    right: 0;
-    z-index: 1;
+    box-shadow: 3px 4px 10px black;
+    width: 700px;
+    z-index: 1;    
 
     h3
     {
         text-align: center;
-        font-size: 1.5rem;
-        padding: 0.8rem;
+        font-size: 1.1rem;
+        padding: 0.5rem;
         color: #f34213;
         font-family: $fontMain2;
         line-height: 2;
         background-color: black;
-    }
-
-    h2
-    {
-        transition: color 0.2s, background-color 0.2s;
-        text-align: center;
-        font-size: 1.5rem;
-        color: #f34213;
-        font-family: $fontMain2;
-        line-height: 2;
     }
 }
 
@@ -133,3 +187,4 @@
     font-size: 1.2rem;
     font-family: $fontMain2;
 }
+

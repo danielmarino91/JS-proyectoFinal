@@ -1,33 +1,35 @@
 let saldoActual = parseInt(localStorage.getItem("saldoGuardado"));
+document.getElementById("juegoBuscado").value = "";
 
 comprobarSaldo()
 
 class juego 
 {
-    constructor(nombreJuego, precioJuego, idJuego) 
+    constructor(nombreJuego, precioJuego, idJuego, productoJuego) 
     {
         this.nombre = nombreJuego;
         this.precio = precioJuego;
         this.id = idJuego;
+        this.numero = productoJuego;
     }
 }
 
 //JUEGOS
-const juego0 = new juego("Crash Bandicoot 4: It's About Time", 9000, "juego0");
-const juego1 = new juego("Cyberpunk 2077", 6000, "juego1");
-const juego2 = new juego("DeathLoop", 10000, "juego2");
-const juego3 = new juego("Doom Eternal", 3800, "juego3");
-const juego4 = new juego("GTA The Trilogy", 12000, "juego4");
-const juego5 = new juego("Guilty Gear Strive", 10000, "juego5");
-const juego6 = new juego("It Takes Two", 8100, "juego6");
-const juego7 = new juego("Metroid Dread", 11000, "juego7");
-const juego8 = new juego("Nioh 2", 9000, "juego8");
-const juego9 = new juego("Psychonauts 2", 9000, "juego9");
-const juego10 = new juego("Ratchet and Clank Rift Apart", 6750, "juego10");
-const juego11 = new juego("Resident Evil Village", 10000, "juego11");
-const juego12 = new juego("Returnal", 10400, "juego12");
-const juego13 = new juego("Spider-Man: Miles Morales", 9000, "juego13");
-const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14");
+const juego0 = new juego("Crash Bandicoot 4: It's About Time", 9000, "juego0", "0");
+const juego1 = new juego("Cyberpunk 2077", 6000, "juego1", "1");
+const juego2 = new juego("DeathLoop", 10000, "juego2", "2");
+const juego3 = new juego("Doom Eternal", 3800, "juego3", "3");
+const juego4 = new juego("GTA The Trilogy", 12000, "juego4", "4");
+const juego5 = new juego("Guilty Gear Strive", 10000, "juego5", "5");
+const juego6 = new juego("It Takes Two", 8100, "juego6", "6");
+const juego7 = new juego("Metroid Dread", 11000, "juego7", "7");
+const juego8 = new juego("Nioh 2", 9000, "juego8", "8");
+const juego9 = new juego("Psychonauts 2", 9000, "juego9", "9");
+const juego10 = new juego("Ratchet and Clank Rift Apart", 6750, "juego10", "10");
+const juego11 = new juego("Resident Evil Village", 10000, "juego11", "11");
+const juego12 = new juego("Returnal", 10400, "juego12", "12");
+const juego13 = new juego("Spider-Man: Miles Morales", 9000, "juego13", "13");
+const juego14 = new juego("Yakuza Like a Dragon", 4800, "juego14", "14");
 
 const listaDeJuegos = [juego0, juego1, juego2, juego3, juego4, juego5, juego6, juego7, juego8, juego9, juego10, juego11, juego12, juego13, juego14];
 let juegosComprados = [];
@@ -38,7 +40,7 @@ comprobarJuegosComprados()
 //GENERAR JUEGOS, NOMBRES Y PRECIOS EN HTML
 for (let i = 0; i < 15; i++)
 {
-    $(`#productGames`).append(`<div class="productGames__game">
+    $(`#productGames`).append(`<div class="productGames__game" id="articulo${i}">
     <img src="images/producto${i}.png" alt="${listaDeJuegos[i].nombre}">
     <div class="productGames__cart">
         <h3 id="producto${i}"></h3>
@@ -54,9 +56,12 @@ for (let i = 0; i < 15; i++)
 
 //EVENTOS
 $("#agregarSaldo").on("click", agregarSaldo);
+$("#mostrarJuegos").on("click", mostrarJuegos);
 $("#resetearSaldo").on("click", resetearSaldo);
 $("#vaciarJuegosComprados").on("click", vaciarJuegosComprados);
 $("#pokeButton").on("click", comprarPokebola);
+$("#btnBuscar").on("click", filtrarJuegos);
+$("#juegoBuscado").on("keyup", filtrarJuegos);
 
 for (let i = 0; i < 15; i++)
 {
@@ -180,7 +185,7 @@ function comprarJuego(juegoElegido)
         
         generarAlerta(`Felicidades! Acabas de comprar <span>${juegoElegido.nombre}</span>`);
         $("#saldoActual").html(saldoActual); 
-        $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
+        $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
         console.log(`Juego comprado: ${juegoElegido.nombre}, Nuevo saldo: ${saldoActual}`);
         console.log(`Juegos comprados: ${juegosComprados.length}`);
@@ -323,7 +328,7 @@ function comprobarJuegosComprados()
         }
         console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
-    $("#listaJuegosComprados").html(juegosComprados.join("</br>"));
+    $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
 }
 
@@ -345,4 +350,28 @@ function quitarModal()
     $("#modalAlert").remove()
     $(".pokemodalBackground").remove()
     $("#pokemodalAlert").remove()
+}
+
+function filtrarJuegos()
+{    
+    const juegoBuscado = document.getElementById("juegoBuscado").value.toLowerCase();
+    
+    for (let juego of listaDeJuegos)
+    {
+        let juegoElegido = juego.nombre.toLowerCase();
+
+        if (juegoElegido.indexOf(juegoBuscado) > -1)
+        {
+            $(`#articulo${juego.numero}`).css("display", "");
+        }
+        else
+        {
+            $(`#articulo${juego.numero}`).css("display", "none");
+        }
+    }
+}
+
+function mostrarJuegos()
+{
+    $(".gameList").toggle()
 }

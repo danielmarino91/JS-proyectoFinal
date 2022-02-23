@@ -21,26 +21,31 @@
             <div class="navbar__logo">
                 <img src="images/kyotogameslogo.png" alt="Kyoto Games">
             </div>
+            <div class="navbar__gameFinder">
+                <img src="images/lupa.png" alt="lupa">
+                <input type="text" placeholder="Buscar juego..." id="juegoBuscado">
+            </div>
             <div class="navbar__wallet">
                 <div class="navbar__wallet--balance">
                     <p>Saldo actual:</p><span id="saldoActual"></span>
                     <img src="images/moneda.png" alt="moneda">
-                </div>
-                <div class="navbar__wallet--button">
-                    <button id="pokeButton">Comprar Pokebola por 1000<img src="images/moneda.png"></button>
                     <button id="agregarSaldo">Agregar saldo</button>
                     <button id="resetearSaldo">Resetear saldo</button>
+                </div>
+                <div class="navbar__wallet--button">
+                    <button id="pokeButton">Comprar Pokebola (1000<img src="images/moneda.png">)</button>
+                    <button id="mostrarJuegos">Mostrar juegos comprados</button>
                     <button id="vaciarJuegosComprados">Vaciar juegos comprados</button>
                 </div>
             </div>
         </nav>
     </header>
     <section>
-        <div id="productGames"></div>
         <div class="gameList">
             <h3>Juegos comprados <span id="cantidadJuegos"></span></h3>
-            <h2 id="listaJuegosComprados"></h2>
+            <div id="listaJuegosComprados"></div>
         </div>
+        <div id="productGames"></div>
     </section>
 
     <script src="js/main.js"></script>
