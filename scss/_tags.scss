@@ -18,3 +18,10 @@ section
     flex-direction: row;
     justify-content: center;
 }
+
+header
+{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}

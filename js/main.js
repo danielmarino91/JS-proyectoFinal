@@ -77,7 +77,7 @@ function agregarSaldo()
     <div class="modalBackground"></div>
     <div id="modalAlert">
         <h2>Ingrese el saldo a agregar</h2>
-        <input type="text" maxlength="7" name="nuevoSaldo" id="nuevoSaldo"></input>
+        <input type="text" maxlength="7" name="nuevoSaldo" id="nuevoSaldo" onkeypress="return isNumber(event)"></input>
         <p id="errorMessage"></p>
         <div class="modalAlert__buttons">
             <button type="submit" id="btnSubmit" value="Agregar">Agregar</button>
@@ -263,22 +263,36 @@ function abrirPokebola()
 
 function resetearSaldo()
 {
-    saldoActual = parseInt(0);
-    generarAlerta("Se reseteo el saldo");
-    localStorage.setItem("saldoGuardado", saldoActual);
-    $("#saldoActual").html(saldoActual);
-    console.log(`Se reseteo el saldo, nuevo saldo: ${saldoActual}`);
+    if (saldoActual == parseInt(0))
+    {
+        generarAlerta(`Su saldo ya es ${saldoActual}, no puede resetearse`);
+    }
+    else
+    {
+        saldoActual = parseInt(0);
+        generarAlerta("Se reseteo el saldo");
+        localStorage.setItem("saldoGuardado", saldoActual);
+        $("#saldoActual").html(saldoActual);
+        console.log(`Se reseteo el saldo, nuevo saldo: ${saldoActual}`);
+    }
 }
 
 function vaciarJuegosComprados()
 {
-    juegosComprados.length = 0;
-    $("#listaJuegosComprados").html(juegosComprados.join());
-    $("#cantidadJuegos").html(`(${juegosComprados.length})`);
-    generarAlerta("Se vacio la lista de juegos");
-    console.log(`Se vacio la lista de juegos, nueva cantidad: ${juegosComprados.length}`);
-    let listaVaciaJSON = JSON.stringify(juegosComprados);
-    localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
+    if (juegosComprados.length == 0)
+    {
+        generarAlerta("La lista de juegos ya esta vacia");
+    }
+    else
+    {
+        juegosComprados.length = 0;
+        $("#listaJuegosComprados").html(juegosComprados.join());
+        $("#cantidadJuegos").html(`(${juegosComprados.length})`);
+        generarAlerta("Se vacio la lista de juegos");
+        console.log(`Se vacio la lista de juegos, nueva cantidad: ${juegosComprados.length}`);
+        let listaVaciaJSON = JSON.stringify(juegosComprados);
+        localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
+    }  
 }
 
 function comprobarJuego(juegoVariable)
@@ -328,20 +342,31 @@ function comprobarJuegosComprados()
         }
         console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
-    $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
+    
+    if (juegosComprados.length == 0)
+    {
+        $("#listaJuegosComprados").html(juegosComprados.join("<h2>"));    
+    }
+    else
+    {
+        $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
+    }
+    
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
 }
 
-function generarAlerta(variableMessage)
+function generarAlerta(variableMessage, variableTypeMessage)
 {
     $("#notifications").append(`
     <div class="generateNotification" style="display: none">${variableMessage}</div>
     `)
+    
+    $(".generateNotification").css("background-color", `${variableTypeMessage}`)
+    
     $(".generateNotification").slideDown(350).delay(5000).slideUp(350);
     setTimeout(function(){
         $(".generateNotification:first-child").remove()
     }, 5700)
-    
 }
 
 function quitarModal()
@@ -369,9 +394,29 @@ function filtrarJuegos()
             $(`#articulo${juego.numero}`).css("display", "none");
         }
     }
+
+    if ($("#productGames").children(':visible').length == 0)
+    {
+        $("#tempMessage").show();
+    }
+    else
+    {
+        $("#tempMessage").hide();
+    }
 }
 
 function mostrarJuegos()
 {
     $(".gameList").toggle()
+}
+
+function isNumber(evt) 
+{
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) 
+    {
+        return false;
+    }
+    return true;
 }
