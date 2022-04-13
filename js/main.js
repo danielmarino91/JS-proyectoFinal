@@ -355,13 +355,11 @@ function comprobarJuegosComprados()
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
 }
 
-function generarAlerta(variableMessage, variableTypeMessage)
+function generarAlerta(variableMessage)
 {
     $("#notifications").append(`
     <div class="generateNotification" style="display: none">${variableMessage}</div>
     `)
-    
-    $(".generateNotification").css("background-color", `${variableTypeMessage}`)
     
     $(".generateNotification").slideDown(350).delay(5000).slideUp(350);
     setTimeout(function(){
@@ -420,3 +418,10 @@ function isNumber(evt)
     }
     return true;
 }
+
+let asd = 0
+
+if (asd == 0)
+console.log("tu vieja")
+else
+console.log("tuhermana")
