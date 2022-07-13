@@ -3,10 +3,8 @@ document.getElementById("juegoBuscado").value = "";
 
 comprobarSaldo()
 
-class juego 
-{
-    constructor(nombreJuego, precioJuego, idJuego, productoJuego) 
-    {
+class juego {
+    constructor(nombreJuego, precioJuego, idJuego, productoJuego) {
         this.nombre = nombreJuego;
         this.precio = precioJuego;
         this.id = idJuego;
@@ -38,8 +36,7 @@ let juegoRepetido = false;
 comprobarJuegosComprados()
 
 //GENERAR JUEGOS, NOMBRES Y PRECIOS EN HTML
-for (let i = 0; i < 15; i++)
-{
+for (let i = 0; i < 15; i++) {
     $(`#productGames`).append(`<div class="productGames__game" id="articulo${i}">
     <img src="images/producto${i}.png" alt="${listaDeJuegos[i].nombre}">
     <div class="productGames__cart">
@@ -49,8 +46,7 @@ for (let i = 0; i < 15; i++)
 </div>`);
 }
 
-for (let i = 0; i < 15; i++)
-{
+for (let i = 0; i < 15; i++) {
     $(`#producto${i}`).html(listaDeJuegos[i].nombre + "</br><span>" + listaDeJuegos[i].precio + "</span>");
 }
 
@@ -63,16 +59,14 @@ $("#pokeButton").on("click", comprarPokebola);
 $("#btnBuscar").on("click", filtrarJuegos);
 $("#juegoBuscado").on("keyup", filtrarJuegos);
 
-for (let i = 0; i < 15; i++)
-{
-    $(`#comprarJuego${i}`).on("click", function(){
+for (let i = 0; i < 15; i++) {
+    $(`#comprarJuego${i}`).on("click", function() {
         comprarJuego(listaDeJuegos[i])
     });
 }
 
 //METODOS
-function agregarSaldo() 
-{
+function agregarSaldo() {
     $("#addBalance").prepend(`
     <div class="modalBackground"></div>
     <div id="modalAlert">
@@ -86,68 +80,58 @@ function agregarSaldo()
     </div>
     `)
 
-    $("#nuevoSaldo").focus();    
+    $("#nuevoSaldo").focus();
     $("#btnSubmit").click(extraerValor);
     $("#btnCancelar").click(quitarModal);
-    $("#nuevoSaldo").keyup(function(e)
-    {
-        if(e.keyCode == 13)
-        {
+    $("#nuevoSaldo").keyup(function(e) {
+        if (e.keyCode == 13) {
             extraerValor();
         }
-        else if (e.keyCode == 27)
-        {
+        else if (e.keyCode == 27) {
             quitarModal();
         }
     });
 }
 
-function extraerValor()
-{
+function extraerValor() {
     let saldoAgregado = parseInt($("#nuevoSaldo").val());
 
-    if (isNaN(saldoAgregado)) 
-    {
+    if (isNaN(saldoAgregado)) {
         $("#errorMessage").html("El valor ingresado no es un número");
         generarAlerta("El valor ingresado no es un número");
         console.log("El valor ingresado no es un número");
         $("#nuevoSaldo").val('');
         $("#nuevoSaldo").focus();
     }
-    else if (saldoAgregado < 0) 
-    {
+    else if (saldoAgregado < 0) {
         $("#errorMessage").html("No se aceptan valores negativos");
         generarAlerta("No se aceptan valores negativos");
         console.log("No se aceptan valores negativos");
         $("#nuevoSaldo").val('');
         $("#nuevoSaldo").focus();
     }
-    else if (saldoAgregado == 0) 
-    {
+    else if (saldoAgregado == 0) {
         $("#errorMessage").html("Debe ingresar un número mayor a 0");
         generarAlerta("Debe ingresar un número mayor a 0");
         console.log("Debe ingresar un número mayor a 0");
         $("#nuevoSaldo").val('');
         $("#nuevoSaldo").focus();
-    }    
-    else if (saldoAgregado > 9999999) 
-    {
+    }
+    else if (saldoAgregado > 9999999) {
         $("#errorMessage").html("No puede ingresar un número tan alto");
         generarAlerta("No puede ingresar un número tan alto");
         console.log("No puede ingresar un número tan alto");
         $("#nuevoSaldo").val('');
         $("#nuevoSaldo").focus();
     }
-    else if (saldoActual + saldoAgregado > 9999999) 
-    {
+    else if (saldoActual + saldoAgregado > 9999999) {
         $("#errorMessage").html("No se puede exceder el limite de 9999999");
         generarAlerta("No se puede exceder el limite de 9999999");
         console.log("No se puede exceder el limite de 9999999");
         $("#nuevoSaldo").val('');
         $("#nuevoSaldo").focus();
     }
-    else 
-    {
+    else {
         saldoActual = saldoActual + saldoAgregado;
         localStorage.setItem("saldoGuardado", saldoActual);
 
@@ -159,32 +143,28 @@ function extraerValor()
     }
 }
 
-function comprarJuego(juegoElegido) 
-{
+function comprarJuego(juegoElegido) {
     let valorJuego = juegoElegido.precio;
     let saldoEnProceso = saldoActual - valorJuego;
     let restoSaldo = valorJuego - saldoActual;
-    
+
     comprobarJuego(juegoElegido);
-    
-    if (saldoEnProceso < 0) 
-    {
+
+    if (saldoEnProceso < 0) {
         generarAlerta(`Saldo insuficiente, necesita <span>${restoSaldo}</span> mas para realizar la compra de <span>${juegoElegido.nombre}</span>`);
         console.log(`Necesita ${restoSaldo} para realizar la compra de ${juegoElegido.nombre}`);
-    } 
-    else if (juegoRepetido == true) 
-    {
-        generarAlerta(`Ya adquiriste <span>${juegoElegido.nombre}</span>`);
-        console.log(`Ya adquiriste ${juegoElegido.nombre}`);        
     }
-    else 
-    {
+    else if (juegoRepetido == true) {
+        generarAlerta(`Ya adquiriste <span>${juegoElegido.nombre}</span>`);
+        console.log(`Ya adquiriste ${juegoElegido.nombre}`);
+    }
+    else {
         saldoActual = saldoEnProceso;
         localStorage.setItem("saldoGuardado", saldoActual);
         juegosComprados.push(juegoElegido.nombre);
-        
+
         generarAlerta(`Felicidades! Acabas de comprar <span>${juegoElegido.nombre}</span>`);
-        $("#saldoActual").html(saldoActual); 
+        $("#saldoActual").html(saldoActual);
         $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
         console.log(`Juego comprado: ${juegoElegido.nombre}, Nuevo saldo: ${saldoActual}`);
@@ -194,22 +174,19 @@ function comprarJuego(juegoElegido)
     }
 }
 
-function comprarPokebola()
-{
-    if (saldoActual < 1000)
-    {
+function comprarPokebola() {
+    if (saldoActual < 1000) {
         generarAlerta("Su saldo es insuficiente para comprar una <span>Pokebola</span>");
         console.log("Su saldo es insuficiente para comprar una Pokebola");
     }
-    else
-    {
-    saldoActual = parseInt(saldoActual - 1000);
-    localStorage.setItem("saldoGuardado", saldoActual);
-    generarAlerta(`Adquiriste una <span>Pokebola<span>`);
-    console.log(`Adquiriste una Pokebola`);
-    $("#saldoActual").html(saldoActual);
+    else {
+        saldoActual = parseInt(saldoActual - 1000);
+        localStorage.setItem("saldoGuardado", saldoActual);
+        generarAlerta(`Adquiriste una <span>Pokebola<span>`);
+        console.log(`Adquiriste una Pokebola`);
+        $("#saldoActual").html(saldoActual);
 
-    $("#buyPokeball").append(`
+        $("#buyPokeball").append(`
     <div class="pokemodalBackground"></div>
     <div id="pokemodalAlert">
         <img src="images/pokebola.png" alt="Pokebola" id="pokebola">
@@ -219,12 +196,11 @@ function comprarPokebola()
     </div>
     `);
 
-    $("#pokebtnSubmit").click(abrirPokebola);
+        $("#pokebtnSubmit").click(abrirPokebola);
     }
 }
 
-function abrirPokebola()
-{
+function abrirPokebola() {
     $("#pokebola").remove();
     console.log("Se abrio la Pokebola...");
 
@@ -236,10 +212,9 @@ function abrirPokebola()
         return Math.random() * (max - min) + min;
     }
 
-    let numeroPokemon = parseInt(generarNumeroRandom(1,898));
-    
-    $.get(`https://pokeapi.co/api/v2/pokemon/${numeroPokemon}`, (res) =>
-    {
+    let numeroPokemon = parseInt(generarNumeroRandom(1, 898));
+
+    $.get(`https://pokeapi.co/api/v2/pokemon/${numeroPokemon}`, (res) => {
         let nombreMayus = res.name.toUpperCase();
 
         $("#temporalMessage").remove();
@@ -255,20 +230,17 @@ function abrirPokebola()
     $(".pokemodalAlert__buttons").prepend(`
     <button type="button" id="pokebtnAceptar" value="Aceptar">Aceptar</button>
     `)
-    
+
     $("#pokebtnSubmit").remove()
     $("#pokebtnCancelar").remove();
     $("#pokebtnAceptar").click(quitarModal);
 }
 
-function resetearSaldo()
-{
-    if (saldoActual == parseInt(0))
-    {
+function resetearSaldo() {
+    if (saldoActual == parseInt(0)) {
         generarAlerta(`Su saldo ya es ${saldoActual}, no puede resetearse`);
     }
-    else
-    {
+    else {
         saldoActual = parseInt(0);
         generarAlerta("Se reseteo el saldo");
         localStorage.setItem("saldoGuardado", saldoActual);
@@ -277,14 +249,11 @@ function resetearSaldo()
     }
 }
 
-function vaciarJuegosComprados()
-{
-    if (juegosComprados.length == 0)
-    {
+function vaciarJuegosComprados() {
+    if (juegosComprados.length == 0) {
         generarAlerta("La lista de juegos ya esta vacia");
     }
-    else
-    {
+    else {
         juegosComprados.length = 0;
         $("#listaJuegosComprados").html(juegosComprados.join());
         $("#cantidadJuegos").html(`(${juegosComprados.length})`);
@@ -292,136 +261,106 @@ function vaciarJuegosComprados()
         console.log(`Se vacio la lista de juegos, nueva cantidad: ${juegosComprados.length}`);
         let listaVaciaJSON = JSON.stringify(juegosComprados);
         localStorage.setItem("juegosAdquiridos", listaVaciaJSON);
-    }  
+    }
 }
 
-function comprobarJuego(juegoVariable)
-{
+function comprobarJuego(juegoVariable) {
     localStorage.getItem("listaDeJuegos");
     let identificarJuego = juegoVariable.nombre;
     let buscarJuegoEnArray = juegosComprados.find(x => x === juegoVariable.nombre);
 
-    if (identificarJuego == buscarJuegoEnArray) 
-    {
-        return juegoRepetido = true;    
+    if (identificarJuego == buscarJuegoEnArray) {
+        return juegoRepetido = true;
     }
-    else
-    {
+    else {
         return juegoRepetido = false;
     }
 }
 
-function comprobarSaldo()
-{
-    if (isNaN(saldoActual)) 
-    {
+function comprobarSaldo() {
+    if (isNaN(saldoActual)) {
         saldoActual = parseInt(0);
         $("#saldoActual").html(saldoActual);
         console.log(`Saldo inicial: ${saldoActual}`);
     }
-    else
-    {
+    else {
         $("#saldoActual").html(saldoActual);
         console.log(`Saldo inicial: ${saldoActual}`);
     }
 }
 
-function comprobarJuegosComprados()
-{
+function comprobarJuegosComprados() {
     let arrayLocal = JSON.parse(localStorage.getItem(`juegosAdquiridos`));
 
-    if (arrayLocal == null)
-    {
+    if (arrayLocal == null) {
         console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
-    else
-    {
-        for (let valor of arrayLocal)
-        {
+    else {
+        for (let valor of arrayLocal) {
             juegosComprados.push(valor);
         }
         console.log(`Juegos comprados: ${juegosComprados.length}`);
     }
-    
-    if (juegosComprados.length == 0)
-    {
-        $("#listaJuegosComprados").html(juegosComprados.join("<h2>"));    
+
+    if (juegosComprados.length == 0) {
+        $("#listaJuegosComprados").html(juegosComprados.join("<h2>"));
     }
-    else
-    {
+    else {
         $("#listaJuegosComprados").html("<h2>" + juegosComprados.join("<h2>"));
     }
-    
+
     $("#cantidadJuegos").html(`(${juegosComprados.length})`);
 }
 
-function generarAlerta(variableMessage)
-{
+function generarAlerta(variableMessage) {
     $("#notifications").append(`
     <div class="generateNotification" style="display: none">${variableMessage}</div>
     `)
-    
+
     $(".generateNotification").slideDown(350).delay(5000).slideUp(350);
-    setTimeout(function(){
+    setTimeout(function() {
         $(".generateNotification:first-child").remove()
     }, 5700)
 }
 
-function quitarModal()
-{
+function quitarModal() {
     $(".modalBackground").remove()
     $("#modalAlert").remove()
     $(".pokemodalBackground").remove()
     $("#pokemodalAlert").remove()
 }
 
-function filtrarJuegos()
-{    
+function filtrarJuegos() {
     const juegoBuscado = document.getElementById("juegoBuscado").value.toLowerCase();
-    
-    for (let juego of listaDeJuegos)
-    {
+
+    for (let juego of listaDeJuegos) {
         let juegoElegido = juego.nombre.toLowerCase();
 
-        if (juegoElegido.indexOf(juegoBuscado) > -1)
-        {
+        if (juegoElegido.indexOf(juegoBuscado) > -1) {
             $(`#articulo${juego.numero}`).css("display", "");
         }
-        else
-        {
+        else {
             $(`#articulo${juego.numero}`).css("display", "none");
         }
     }
 
-    if ($("#productGames").children(':visible').length == 0)
-    {
+    if ($("#productGames").children(':visible').length == 0) {
         $("#tempMessage").show();
     }
-    else
-    {
+    else {
         $("#tempMessage").hide();
     }
 }
 
-function mostrarJuegos()
-{
+function mostrarJuegos() {
     $(".gameList").toggle()
 }
 
-function isNumber(evt) 
-{
+function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) 
-    {
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
         return false;
     }
     return true;
 }
-
-let asd = 0
-
-if (asd == 0)
-console.log("tu vieja")
-else
-console.log("tuhermana")
